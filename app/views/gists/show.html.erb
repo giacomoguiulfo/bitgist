@@ -15,7 +15,7 @@
             <p class="text-lg text-gray-900">
               <%= link_to @gist.user.username, user_gists_path(@gist.user.username) %>
               <span>/</span>
-              <%= link_to @gist.id, @gist %>
+              <%= link_to "gist:#{@gist.id}", @gist %>
             </p>
             <% unless @gist.public? %>
             <svg class="w-4 h-4 mt-1 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
