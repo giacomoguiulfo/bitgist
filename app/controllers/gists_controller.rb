@@ -1,10 +1,12 @@
 class GistsController < ApplicationController
-  before_action :set_gist, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: %i[ index show ]
+  load_and_authorize_resource
+  skip_authorize_resource only: :show
 
   # GET /gists or /gists.json
   def index
-    @q = Gist.ransack(params[:q])
-    @gists = @q.result
+    @q = Gist.accessible_by(current_ability).ransack(params[:q])
+    @pagy, @gists = pagy(@q.result.includes(:user, :files))
   end
 
   # GET /gists/1 or /gists/1.json

@@ -3,7 +3,7 @@ class CreateGists < ActiveRecord::Migration[6.1]
     create_table :gists, id: false do |t|
       t.binary :id, limit: 16, primary_key: true
       t.string :description
-      t.boolean :public
+      t.boolean :public, null: false, default: true
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

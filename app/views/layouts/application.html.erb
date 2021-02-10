@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <%= render 'layouts/head' %>
-  </head>
 
-  <body>
-    <%= render 'layouts/navbar' %>
-    <div class="max-w-5xl p-4 mx-auto mt-10">
+<head>
+  <%= render 'layouts/head' %>
+</head>
+
+<body>
+  <%= render 'layouts/navbar' %>
+  <div class="max-w-5xl p-4 mx-auto mt-10">
     <%= yield %>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>

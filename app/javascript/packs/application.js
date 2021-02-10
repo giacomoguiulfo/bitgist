@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-// import "@hotwired/turbo-rails"
+import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
@@ -13,6 +13,7 @@ ActiveStorage.start()
 
 import "controllers"
 import "stylesheets/application"
+import "highlight.js/styles/github-gist.css"
 
 const importAll = (r) => r.keys().forEach(r);
 importAll(require.context('../../../node_modules/codemirror/mode/', true, /\.js$/));

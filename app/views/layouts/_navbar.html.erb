@@ -11,7 +11,9 @@
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <%= navbar_link gists_path, 'Discover' %>
+            <% if current_user %>
             <%= navbar_link user_gists_path(current_user.username), 'My Stuff' %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -29,7 +31,7 @@
               </svg>
             </div>
             <%= search_form_for @q do |f| %>
-              <%= f.search_field :description_cont,
+              <%= f.search_field :description_or_user_username_or_files_language_cont,
               placeholder: "Search",
               class: "block w-full py-2 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 bg-gray-700 border border-transparent rounded-md focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm" %>
             <% end %>
@@ -38,10 +40,16 @@
       </div>
       <div class="lg:block lg:ml-4">
         <div class="flex items-center">
+          <% if current_user %>
           <a href="<%= new_gist_path %>"
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             New Gist
           </a>
+          <% else %>
+           <%= button_to "Connect with Github", user_github_omniauth_authorize_path,
+              class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+              data: { turbo: false } %>
+          <% end %>
         </div>
       </div>
     </div>

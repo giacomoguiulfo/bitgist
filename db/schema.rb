@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_02_07_204007) do
 
   create_table "gists", id: :binary, force: :cascade do |t|
     t.string "description"
-    t.boolean "public"
+    t.boolean "public", default: true, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

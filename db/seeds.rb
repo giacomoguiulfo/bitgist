@@ -24,6 +24,7 @@ Dir.glob("#{Rails.root}/app/**/*").each do |file|
   next unless File.file?(file)
 
   Gist.create!(
+    public: [true, false].sample,
     user: user,
     description: Faker::Company.bs,
     files: [Gist::File.new(

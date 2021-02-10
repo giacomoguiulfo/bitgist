@@ -1,0 +1,46 @@
+<% link = pagy_link_proc(pagy) -%>
+<%#                            -%>
+<nav aria-label="pager" class="flex items-center justify-between px-4 border-t border-gray-200 sm:px-0"
+  role="navigation">
+  <div class="flex flex-1 w-0 -mt-px">
+    <% if pagy.prev                -%>
+    <%== link.call(pagy.prev, "Prev", 'aria-label="previous" class="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300"') do %>
+    <svg class="w-5 h-5 mr-3 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+      aria-hidden="true">
+      <path fill-rule="evenodd"
+        d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+        clip-rule="evenodd" />
+    </svg>
+    <% end %>
+    <% else                        -%>
+    <span
+      class="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300">Prev</span>
+    <% end                         -%>
+  </div>
+  <div class="hidden md:-mt-px md:flex">
+    <% pagy.series.each do |item| # series example: [1, :gap, 7, 8, "9", 10, 11, :gap, 36] -%>
+    <%   if    item.is_a?(Integer) -%>
+    <%== link.call(item, item, 'class="inline-flex items-center px-4 pt-4 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300"') %>
+    <%   elsif item.is_a?(String)  -%>
+    <a href="#"
+      class="inline-flex items-center px-4 pt-4 text-sm font-medium text-indigo-600 border-t-2 border-indigo-500"
+      aria-current="page">
+      <%= item %>
+    </a>
+    <%   elsif item == :gap        -%>
+    <span class="inline-flex items-center px-4 pt-4 text-sm font-medium text-gray-500 border-t-2 border-transparent">
+      <%== pagy_t('pagy.nav.gap') %>
+    </span>
+    <%   end                       -%>
+    <% end                         -%>
+  </div>
+  <div class="flex justify-end flex-1 w-0 -mt-px">
+    <% if pagy.next                -%>
+    <%== link.call(pagy.next, "Next", 'aria-label="next" class="inline-flex items-center pt-4 pl-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300"') %>
+    <% else                        -%>
+    <span
+      class="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300">Next</span>
+    <% end                         -%>
+  </div>
+  <%#                            -%>
+</nav>

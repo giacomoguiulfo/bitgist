@@ -1,17 +1,19 @@
-<% unless @gists.load.size.zero? %>
-<ul class="relative z-0 border-b border-gray-200 divide-y divide-gray-200">
+<% if @gists.size > 0 %>
+<%= turbo_frame_tag "gists" do %>
+<ul class="relative z-0 divide-y divide-gray-200">
   <% @gists.each do |gist| %>
-  <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
-    <%= link_to gist, class: 'contents' do %>
+  <li class="relative py-5 pl-4 pr-6 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
     <div class="flex items-center justify-between space-x-4">
       <!-- Repo name and link -->
       <div class="min-w-0 space-y-3">
         <div class="flex items-center space-x-3">
           <span class="block">
-            <h2 class="text-sm font-medium">
-              <span class="absolute inset-0 truncate" aria-hidden="true"></span>
-              gist:<%= gist.id %>
+            <%= link_to gist, class: 'contents', data: {"turbo-frame"=> "_top"} do %>
+            <h2 class="text-sm font-medium text-blue-500">
+              <span class=""><%= gist.user.username %></span><span class="text-gray-500"> / </span>
+              <span class="font-bold text-blue-500">gist:<%= gist.id %></span>
             </h2>
+            <% end %>
           </span>
 
           <% unless gist.public? %>
@@ -23,7 +25,7 @@
           <% end %>
         </div>
         <% if gist.description.present? %>
-        <p class="relative group flex items-center space-x-2.5">
+        <p class="relative group italic flex items-center space-x-2.5">
           <span class="text-sm font-medium text-gray-500 truncate group-hover:text-gray-900">
             <%= gist.description %>
           </span>
@@ -62,11 +64,24 @@
           <span>Last updated <%= time_ago_in_words(gist.updated_at) %> ago</span>
         </p>
       </div>
+
+    </div>
+    <%= link_to gist, class: 'contents', data: {"turbo-frame"=> "_top"} do %>
+    <div class="my-4 border border-gray-200 rounded shadow-sm hover:bg-blue-300 p-0.5">
+      <pre data-controller="highlight"><code data-highlight-target="code" class="<%= gist.files.first.language %> text-sm"><%= gist.files.first.content %></code></pre>
     </div>
     <% end %>
   </li>
   <% end %>
 </ul>
+<% end %>
+
+<% if @pagy.pages > 1 %>
+<div class="my-8">
+  <%== render partial: 'pagy/nav', locals: {pagy: @pagy} %>
+</div>
+<% end %>
+
 <% else %>
 <div class="mt-32">
   <p class="flex-1 text-center text-gray-700">Hmm, that's weird. There's nothing here 🧐</p>

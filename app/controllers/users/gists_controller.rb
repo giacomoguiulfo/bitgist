@@ -4,7 +4,7 @@ class Users::GistsController < ApplicationController
 
   # GET /gists or /gists.json
   def index
-    @gists = @user.gists
+    @pagy, @gists = pagy(@user.gists.accessible_by(current_ability))
   end
 
   # GET /gists/1 or /gists/1.json

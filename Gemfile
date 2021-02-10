@@ -62,3 +62,5 @@ gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
 gem 'ulid'
 gem 'ransack', github: 'activerecord-hackery/ransack'
+gem "pagy", "~> 3.10"
+gem "cancancan", "~> 3.2"

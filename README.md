@@ -41,3 +41,11 @@ You now should be able to access the application from your browser at http://loc
 - Syntax Highlighting
 - Gist Search based on description
 - Github Oauth authentication
+
+
+## Ideas
+
+These are some ideas for possible features:
+
+- User Following
+- Notifications

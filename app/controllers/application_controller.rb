@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  include Pagy::Backend
+
   before_action :set_ransack
 
   def new_session_path(scope)

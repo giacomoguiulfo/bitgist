@@ -1,6 +1,5 @@
 <%= form_with(model: gist, data: {controller: 'nested-form list', "list-size-value" => gist.files.size}) do |form| %>
 <% if gist.errors.any? %>
-
 <div class="p-4 rounded-md bg-red-50">
   <div class="flex">
     <div class="flex-shrink-0">
@@ -14,14 +13,15 @@
     </div>
     <div class="ml-3">
       <h3 class="text-sm font-medium text-red-800">
-        There <%= "was".pluralize(gist.errors.count) %> <%= pluralize(gist.errors.count, "error") %> with your submission
+        There <%= "was".pluralize(gist.errors.count) %> <%= pluralize(gist.errors.count, "error") %> with your
+        submission
       </h3>
       <div class="mt-2 text-sm text-red-700">
         <ul class="pl-5 space-y-1 list-disc">
           <% gist.errors.messages.values.each do |error| %>
-            <% error.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
+          <% error.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
           <% end %>
         </ul>
       </div>
@@ -53,15 +53,15 @@
     <span>Add File</span>
   </button>
 
+
+  <% unless gist.persisted? %>
   <span data-controller="dropdown" data-dropdown-active-class="bg-teal-600"
     data-dropdown-invisible-class="scale-95 opacity-0" data-dropdown-visible-class="scale-100 opacity-100"
     data-dropdown-entering-class="duration-100 ease-out" data-dropdown-enter-timeout="100"
     data-dropdown-leaving-class="duration-75 ease-in" data-dropdown-leave-timeout="75"
     class="relative z-0 inline-flex rounded-md shadow-sm">
     <%= form.hidden_field :public, value: '1', data: {"dropdown-target" => "checkbox"} %>
-    <%= form.submit 'Create public gist', data: {"dropdown-target" => "text"},
-    class: "relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 border border-gray-100 rounded-l-md hover:bg-green-700 focus:z-10 focus:outline-none"
-  %>
+    <%= form.submit 'Create public gist', data: {"dropdown-target" => "text"}, class: "relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 border border-gray-100 rounded-l-md hover:bg-green-700 focus:z-10 focus:outline-none" %>
     <span class="relative block -ml-px">
       <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button"
         id="option-menu" type="button"
@@ -95,7 +95,7 @@
               Create private gist
             </p>
             <p class="text-xs">
-              Secret gists are hidden by search enginer but visible to anyone
+              Secret gists are hidden by search engine but visible to anyone
               you give the URL to.
             </p>
           </button>
@@ -103,7 +103,13 @@
       </div>
     </span>
   </span>
+  <% else %>
+  <div class="flex items-center">
+    <%= form.check_box :public, class: "focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded" %>
+    <%= form.label :public, class: "ml-2 block text-sm font-medium text-gray-700" %>
+    <%= link_to 'Cancel', gist, class: "ml-4 relative inline-flex items-center px-4 py-2 text-sm font-medium text-red-500 bg-white border border-gray-200 rounded-md hover:bg-gray-200 focus:z-10 focus:outline-none" %>
+    <%= form.submit 'Update', class: "ml-2 relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 border border-gray-100 rounded-md hover:bg-green-700 focus:z-10 focus:outline-none" %>
+  </div>
+  <% end %>
 </div>
-
-
 <% end %>
