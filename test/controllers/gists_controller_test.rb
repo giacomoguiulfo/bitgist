@@ -16,8 +16,8 @@ class GistsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create gist" do
-    assert_difference('Gist.count') do
-      post gists_url, params: { gist: { description: @gist.description, public: @gist.public, user_id: @gist.user_id } }
+    assert_difference("Gist.count") do
+      post gists_url, params: {gist: {description: @gist.description, public: @gist.public, user_id: @gist.user_id}}
     end
 
     assert_redirected_to gist_url(Gist.last)
@@ -34,12 +34,12 @@ class GistsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update gist" do
-    patch gist_url(@gist), params: { gist: { description: @gist.description, public: @gist.public, user_id: @gist.user_id } }
+    patch gist_url(@gist), params: {gist: {description: @gist.description, public: @gist.public, user_id: @gist.user_id}}
     assert_redirected_to gist_url(@gist)
   end
 
   test "should destroy gist" do
-    assert_difference('Gist.count', -1) do
+    assert_difference("Gist.count", -1) do
       delete gist_url(@gist)
     end
 

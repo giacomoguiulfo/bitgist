@@ -11,7 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     remember_me(user)
     sign_in_and_redirect user, event: :authentication
-    set_flash_message :notice, :success, kind: 'Github'
+    set_flash_message :notice, :success, kind: "Github"
   end
 
   private
@@ -35,8 +35,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def create_user
     User.create(
       name: auth.info.name,
+      avatar_url: auth.info.image,
+      github_url: auth.info.urls.GitHub,
       username: auth.info.nickname,
-      email: auth.info.email,
+      email: auth.info.email
     )
   end
 end

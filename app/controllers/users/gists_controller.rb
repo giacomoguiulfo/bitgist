@@ -1,6 +1,6 @@
 class Users::GistsController < ApplicationController
   before_action :set_username
-  before_action :set_gist, only: %i[ show ]
+  before_action :set_gist, only: %i[show]
 
   # GET /gists or /gists.json
   def index
@@ -12,12 +12,13 @@ class Users::GistsController < ApplicationController
   end
 
   private
-    def set_username
-      @user = User.find_by(username: params[:username])
-    end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_gist
-      @gist = Gist.find(params[:id])
-    end
+  def set_username
+    @user = User.find_by(username: params[:username])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_gist
+    @gist = Gist.find(params[:id])
+  end
 end

@@ -7,9 +7,8 @@
             <h1 class="text-2xl font-bold tracking-wide text-white lg:text-3xl">BitGist<h1>
           <% end %>
         </div>
-        <div class="hidden lg:block lg:ml-6">
-          <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <div class="lg:block lg:ml-6">
+          <div class="flex -mr-4 -space-x-2 md:space-x-4">
             <%= navbar_link gists_path, 'Discover' %>
             <% if current_user %>
             <%= navbar_link user_gists_path(current_user.username), 'My Stuff' %>

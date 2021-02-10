@@ -1,5 +1,5 @@
 class GistsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :authenticate_user!, except: %i[index show]
   load_and_authorize_resource
   skip_authorize_resource only: :show
 
@@ -61,6 +61,7 @@ class GistsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_gist
     @gist = Gist.find(params[:id])

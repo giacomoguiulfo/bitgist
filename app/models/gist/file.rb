@@ -3,8 +3,8 @@ class Gist::File < ApplicationRecord
 
   before_validation :set_filename, if: ->(file) { file.filename.blank? }
 
-  validates :content, presence: { message: "File contents can't be empty" }
-  validates :filename, uniqueness: { scope: :gist_id, message: 'Filenames must be unique' }
+  validates :content, presence: {message: "File contents can't be empty"}
+  validates :filename, uniqueness: {scope: :gist_id, message: "Filenames must be unique"}
 
   private
 

@@ -39,13 +39,22 @@ You now should be able to access the application from your browser at http://loc
 - Multi-file Gists
 - Private and public gists
 - Syntax Highlighting
-- Gist Search based on description
+- Gist Search based on description, language or creator
 - Github Oauth authentication
-
 
 ## Ideas
 
 These are some ideas for possible features:
 
+- API Authentication
+- Markdown Support
+- Gist versioning / revisions
+- Gist forking
+- Gist zip download
+- Gist::File Raw
+- Gist stars
 - User Following
 - Notifications
+- Serach Result Sorting / Filtering
+- Comments and reactions
+- Import Gists from Github
